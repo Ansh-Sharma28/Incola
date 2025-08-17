@@ -1,12 +1,22 @@
 @import "tailwindcss";
 
-/* Optional: if you want a consistent font across everything */
 :root {
   font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
 }
+
+/* Tailwind v4 theme extension */
 @theme {
-  --color-gold-300: #f6e27f;  /* light golden yellow */
-  --color-gold-400: #f4d35e;  /* champagne-gold */
-  --color-gold-600: #d4af37;  /* rich gold accent */
-  --color-black-900: #000000; /* pure black */
+  /* Core palette */
+  --color-velvet: #2E311A;           /* heading / “Incola” */
+  --color-gold: #AD832F;             /* subheading / “Housing Redefined” */
+  --color-silt: #6B5B2D;             /* secondary text / paragraph */
+  --color-pearl: #C6AE73;            /* background option */
+  --color-antique: #AD9664;          /* accent / borders / hover */
+
+  /* Semantic tokens */
+  --color-heading: var(--color-velvet);       /* big titles */
+  --color-subheading: var(--color-gold);     /* secondary headings */
+  --color-text: var(--color-silt);           /* body text */
+  --color-background: var(--color-pearl);    /* main background */
+  --color-accent: var(--color-antique);      /* hover, borders, highlights */
 }
