@@ -2,13 +2,13 @@ import React from "react";
 
 export default function Navbar() {
   return (
-    <header className="flex justify-between items-center px-8 py-6 border-b border-accent">
+    <header className="flex justify-between items-center px-8 py-4 border-b border-white bg-gradient-to-b from-accent  via-white to-accent backdrop-blur-lg">
       {/* Logo */}
       <a href="/" className="flex items-center space-x-2">
         <img
   src="/logo.png"
   alt="Incola Logo"
-  className="h-12 md:h-16 lg:h-18 w-auto object-contain"
+  className="h-10 md:h-12 lg:h-14 w-auto object-contain"
 />
 
 

@@ -4,7 +4,7 @@ import Hero from "../components/Hero";
 
 export default function HomePage() {
   return (
-    <div className="bg-pearl text-text font-sans">
+    <div className="text-text font-sans">
       {/* Navbar */}
       <Navbar />
 
