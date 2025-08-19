@@ -8,11 +8,13 @@ const images = [
   "/hero/incola-hero-3.jpeg",
   "/hero/incola-hero-4.jpeg",
 ];
+const titles = ["Spaces", "Wellness", "Nature", "Comfort"];
 
 export default function Hero() {
   const [index, setIndex] = useState(0);
   const intervalRef = useRef(null);
   const startTimerRef = useRef(null);
+  const [hasStarted, setHasStarted] = useState(false);
 
   const clearTimers = () => {
     if (intervalRef.current) clearInterval(intervalRef.current);
@@ -49,10 +51,24 @@ export default function Hero() {
     return clearTimers;
   }, []);
 
+  // Set hasStarted to true after the initial animation delay
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setHasStarted(true);
+    }, 5000); // Corresponds to the total animation delay before autoplay starts
+    return () => clearTimeout(timer);
+  }, []);
+
+  const titleVariants = {
+    initial: hasStarted ? { opacity: 0, x: 20 } : { opacity: 0, color: "var(--heading)" },
+    animate: hasStarted ? { opacity: 1, x: 0, transition: { duration: 0.8 } } : { opacity: 1, color: ["var(--heading)", "var(--gold)"], transition: { delay: 1, duration: 2.5, ease: "easeInOut" } },
+    exit: { opacity: 0, x: -20, transition: { duration: 0.8 } },
+  };
+
   return (
     <section className="relative h-[500px] flex items-center justify-center bg-gray-200 px-[40px] overflow-hidden">
       <div className="relative flex items-center justify-center w-full max-w-6xl">
-        
+
         {/* TEXT (starts centered, then slides left) */}
         <motion.div
           initial={{ x: 0, opacity: 1 }}
@@ -70,15 +86,20 @@ export default function Hero() {
           </motion.h1>
 
           <div className="flex justify-center gap-3">
-            <motion.h2
-              initial={{ opacity: 0, color: "var(--heading)" }}
-              animate={{ opacity: 1, color: ["var(--heading)", "var(--gold)"] }}
-              transition={{ delay: 1, duration: 2.5, ease: "easeInOut" }}
-              className="text-4xl font-bold"
-            >
-              Housing
-            </motion.h2>
-
+            <div className="w-[160px] flex justify-end overflow-hidden">
+              <AnimatePresence mode="wait">
+                <motion.h2
+                  key={index}
+                  variants={titleVariants}
+                  initial="initial"
+                  animate="animate"
+                  exit="exit"
+                  className="text-4xl font-bold"
+                >
+                  {titles[index]}
+                </motion.h2>
+              </AnimatePresence>
+            </div>
             <motion.h2
               initial={{ opacity: 0, x: 20 }}
               animate={{ opacity: 1, x: 0, color: "var(--gold)" }}
