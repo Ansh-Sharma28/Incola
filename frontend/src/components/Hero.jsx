@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { ChevronLeft, ChevronRight } from "lucide-react"; // ✅ Import icons
+import { ChevronLeft, ChevronRight } from "lucide-react";
 
 const images = [
   "/hero/incola-hero-1.jpeg",
@@ -9,6 +9,7 @@ const images = [
   "/hero/incola-hero-4.jpeg",
 ];
 const titles = ["Spaces", "Wellness", "Nature", "Comfort"];
+const initialTitle = "Housing";
 
 export default function Hero() {
   const [index, setIndex] = useState(0);
@@ -27,49 +28,52 @@ export default function Hero() {
       intervalRef.current = setInterval(() => {
         setIndex((prev) => (prev + 1) % images.length);
       }, 5000);
-    }, 5000); // wait 5s intro before autoplay
+    }, 5000);
   };
 
   const nextSlide = () => {
     setIndex((prev) => (prev + 1) % images.length);
-    startAutoplay(); // reset autoplay when user clicks
+    startAutoplay();
   };
 
   const prevSlide = () => {
     setIndex((prev) => (prev - 1 + images.length) % images.length);
-    startAutoplay(); // reset autoplay when user clicks
+    startAutoplay();
   };
 
   const goToSlide = (i) => {
     setIndex(i);
-    startAutoplay(); // reset autoplay when bullet clicked
+    startAutoplay();
   };
 
-  // Setup autoplay
   useEffect(() => {
     startAutoplay();
     return clearTimers;
   }, []);
 
-  // Set hasStarted to true after the initial animation delay
   useEffect(() => {
-    const timer = setTimeout(() => {
-      setHasStarted(true);
-    }, 5000); // Corresponds to the total animation delay before autoplay starts
+    const timer = setTimeout(() => setHasStarted(true), 5000);
     return () => clearTimeout(timer);
   }, []);
 
   const titleVariants = {
-    initial: hasStarted ? { opacity: 0, x: 20 } : { opacity: 0, color: "var(--heading)" },
-    animate: hasStarted ? { opacity: 1, x: 0, transition: { duration: 0.8 } } : { opacity: 1, color: ["var(--heading)", "var(--gold)"], transition: { delay: 1, duration: 2.5, ease: "easeInOut" } },
+    initial: hasStarted
+      ? { opacity: 0, x: 20 }
+      : { opacity: 0, color: "var(--heading)" },
+    animate: hasStarted
+      ? { opacity: 1, x: 0, transition: { duration: 0.8 } }
+      : {
+          opacity: 1,
+          color: ["var(--heading)", "var(--gold)"],
+          transition: { delay: 1, duration: 2.5, ease: "easeInOut" },
+        },
     exit: { opacity: 0, x: -20, transition: { duration: 0.8 } },
   };
 
   return (
     <section className="relative h-[500px] flex items-center justify-center bg-gray-200 px-[40px] overflow-hidden">
       <div className="relative flex items-center justify-center w-full max-w-6xl">
-
-        {/* TEXT (starts centered, then slides left) */}
+        {/* TEXT */}
         <motion.div
           initial={{ x: 0, opacity: 1 }}
           animate={{ x: -450, opacity: 1 }}
@@ -86,17 +90,17 @@ export default function Hero() {
           </motion.h1>
 
           <div className="flex justify-center gap-3">
-            <div className="w-[160px] flex justify-end overflow-hidden">
+            <div className="w-[160px] flex justify-end ">
               <AnimatePresence mode="wait">
                 <motion.h2
-                  key={index}
+                  key={hasStarted ? index : "initial-title"}
                   variants={titleVariants}
                   initial="initial"
                   animate="animate"
                   exit="exit"
                   className="text-4xl font-bold"
                 >
-                  {titles[index]}
+                  {hasStarted ? titles[index] : initialTitle}
                 </motion.h2>
               </AnimatePresence>
             </div>
@@ -120,14 +124,13 @@ export default function Hero() {
           </motion.button>
         </motion.div>
 
-        {/* IMAGE SLIDER CONTAINER */}
+        {/* IMAGE SLIDER */}
         <motion.div
           initial={{ opacity: 0, scale: 0.9 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ delay: 4.5, duration: 1.2 }}
           className="absolute right-0 w-[800px] h-[450px] rounded-2xl shadow-lg overflow-hidden bg-white flex items-center justify-center"
         >
-          {/* Slides */}
           <AnimatePresence mode="wait">
             <motion.img
               key={index}
@@ -141,7 +144,6 @@ export default function Hero() {
             />
           </AnimatePresence>
 
-          {/* Prev Button */}
           <button
             onClick={prevSlide}
             className="absolute left-3 top-1/2 -translate-y-1/2 text-gold/80 rounded-full w-8 h-8 flex items-center justify-center hover:bg-antique/40"
@@ -149,7 +151,6 @@ export default function Hero() {
             <ChevronLeft size={24} />
           </button>
 
-          {/* Next Button */}
           <button
             onClick={nextSlide}
             className="absolute right-3 top-1/2 -translate-y-1/2 text-gold/80 rounded-full w-8 h-8 flex items-center justify-center hover:bg-antique/40"
@@ -157,7 +158,6 @@ export default function Hero() {
             <ChevronRight size={24} />
           </button>
 
-          {/* Bullets */}
           <div className="absolute bottom-3 left-1/2 -translate-x-1/2 flex gap-2">
             {images.map((_, i) => (
               <button
