@@ -2,7 +2,7 @@ import React from "react";
 
 export default function Navbar() {
   return (
-    <header className="flex justify-between items-center px-8 py-4 border-b border-white bg-gradient-to-b from-accent  via-white to-accent backdrop-blur-lg">
+    <header className="flex justify-between items-center px-8 py-4 border-b bg-gradient-to-b from-gold  via-white to-gold backdrop-blur-lg">
       {/* Logo */}
       <a href="/" className="flex items-center space-x-2">
         <img
@@ -18,15 +18,10 @@ export default function Navbar() {
 
       {/* Nav Links */}
       <nav className="space-x-6">
-        <a href="#services" className="hover:text-accent">Services</a>
-        <a href="#work" className="hover:text-accent">Work</a>
-        <a href="#about" className="hover:text-accent">About</a>
-        <a
-          href="#contact"
-          className="px-4 py-2 bg-accent text-background rounded-lg hover:bg-antique font-medium"
-        >
-          Contact
-        </a>
+        <a href="#services" className=" text-zinc-950 hover:text-gold">Services</a>
+        <a href="#work" className="text-zinc-950 hover:text-gold">Work</a>
+        <a href="#about" className="text-zinc-950 hover:text-gold">About</a>
+        <a href="#about" className="text-zinc-950 hover:text-gold">Contact</a>
       </nav>
     </header>
   );

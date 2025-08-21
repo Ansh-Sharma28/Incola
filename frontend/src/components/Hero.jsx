@@ -71,7 +71,9 @@ export default function Hero() {
   };
 
   return (
-    <section className="relative h-[500px] flex items-center justify-center bg-gray-200 px-[40px] overflow-hidden">
+    <section className="relative h-[500px] flex items-center justify-center bg-gray-200 px-[40px] overflow-hidden bg-cover bg-center"
+      style={{ backgroundImage: "url('/hero-bg.jpeg')" }}
+    >
       <div className="relative flex items-center justify-center w-full max-w-6xl">
         {/* TEXT */}
         <motion.div
@@ -84,12 +86,12 @@ export default function Hero() {
             initial={{ opacity: 0, y: -50 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 1 }}
-            className="text-6xl font-extrabold mb-6 bg-gradient-to-r from-gold to-accent bg-clip-text text-transparent"
+            className="text-6xl font-extrabold mb-6 bg-gold bg-clip-text text-transparent"
           >
             Incola
           </motion.h1>
 
-          <div className="flex justify-center gap-3">
+          <div className="flex justify-center gap-3 text-accent">
             <div className="w-[160px] flex justify-end ">
               <AnimatePresence mode="wait">
                 <motion.h2
@@ -98,7 +100,7 @@ export default function Hero() {
                   initial="initial"
                   animate="animate"
                   exit="exit"
-                  className="text-4xl font-bold"
+                  className="text-4xl font-bold text-accent"
                 >
                   {hasStarted ? titles[index] : initialTitle}
                 </motion.h2>
@@ -106,7 +108,7 @@ export default function Hero() {
             </div>
             <motion.h2
               initial={{ opacity: 0, x: 20 }}
-              animate={{ opacity: 1, x: 0, color: "var(--gold)" }}
+              animate={{ opacity: 1, x: 0, color: "var(--accent)" }}
               transition={{ delay: 2, duration: 0.8 }}
               className="text-4xl font-bold"
             >
@@ -118,7 +120,7 @@ export default function Hero() {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ delay: 3.5, duration: 0.8 }}
-            className="mt-8 px-6 py-3 bg-accent text-background text-lg font-semibold rounded-lg hover:bg-antique transition"
+            className="mt-8 px-6 py-3 bg-accent text-white text-lg font-semibold rounded-lg hover:bg-gold cursor-pointer transition"
           >
             Get Started
           </motion.button>
@@ -129,7 +131,7 @@ export default function Hero() {
           initial={{ opacity: 0, scale: 0.9 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ delay: 4.5, duration: 1.2 }}
-          className="absolute right-0 w-[800px] h-[450px] rounded-2xl shadow-lg overflow-hidden bg-white flex items-center justify-center"
+          className="absolute right-0 w-[800px] h-[450px] rounded-2xl shadow-lg overflow-hidden flex items-center justify-center"
         >
           <AnimatePresence mode="wait">
             <motion.img
