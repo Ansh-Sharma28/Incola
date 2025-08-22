@@ -86,7 +86,7 @@ export default function Hero() {
             initial={{ opacity: 0, y: -50 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 1 }}
-            className="text-6xl font-extrabold mb-6 bg-gold bg-clip-text text-transparent"
+            className="text-6xl font-extrabold mb-6 bg-gradient-to-tr from-yellow-400 via-gold to bg-amber-500 bg-clip-text text-transparent"
           >
             Incola
           </motion.h1>
